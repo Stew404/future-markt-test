@@ -1,0 +1,200 @@
+@import "./mixins.scss";
+
+.callform{
+    position: fixed;
+
+    left: 0;
+    top: 0;
+
+    width: min(612px, 100vw);
+    height: 100vh;
+
+    transform: translateX(-100%);
+
+    transition: transform .3s ease;
+
+    &__outside {
+        width: 100vw;
+        height: 100vh;
+
+        position: fixed;
+
+        top: 0;
+        left: 0;
+
+        background-color: #0F1D45;
+
+        opacity: .6;
+
+        visibility: hidden;
+
+        
+
+        z-index: 0;
+
+        &_opened {
+            visibility: visible;
+        }
+    }
+
+    form {
+        visibility: hidden;
+    }
+
+    &_opened {
+        form {
+            visibility: visible;
+        }
+        transform: translateX(0);
+    }
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    background-color: #0F1D45;
+
+    .close-button{
+        background: none;
+        border: none;
+
+        position: absolute;
+
+        top: 40px;
+        right: 40px;
+
+        @media screen and (max-width: 480px) {
+
+            top: 25px;
+            right: 25px;
+            
+            svg{
+                width: 20px;
+                height: 20px;
+            }
+        }
+    }
+
+    h2 {
+        font-size: 50px;
+        margin-bottom: 65px;
+
+        @media screen and (max-width: 480px) {
+            font-size: 20px;
+        }
+    }
+
+    .form {
+        display: flex;
+        flex-direction: column;
+
+        max-width: 480px;
+
+        @media screen and (max-width: 611px) {
+            padding: 0 30px;
+        }
+
+        input[name="name"],
+        input[name="phone"] {
+            @include text-field;
+        }
+
+        &__name {
+            
+            margin-bottom: 65px;
+
+            input {
+                width: 100%;
+            }
+        }
+
+        &__phone {
+            width: 100%;
+            margin-bottom: 110px;
+
+            input {
+                width: 100%;
+            }
+        }
+
+        &__agreement {
+            margin-bottom: 90px;
+        }
+
+        &__agreementinput{
+            @include checkbox;
+        }
+
+        
+        &__submit {
+            @include button(false);
+
+            min-width: 251px;
+            min-height: 47px;
+
+
+            &::before{
+                @media screen and (max-width: 768px) {
+                    right: 47px;
+                }
+
+
+                @media screen and (max-width: 480px) {
+                    right: 47px;
+                }
+            }
+
+            &::after{
+                @media screen and (max-width: 768px) {
+                    content: url("../public/button-arrow-white-medium.svg");
+
+                    width: 13px;
+                    height: 13px;
+                
+                    right: 8px;
+                    bottom: 8px;
+                }
+            }
+
+            @media screen and (max-width: 768px) {
+                font-size: 14px;
+                padding-right: 47px;
+            }
+
+        }
+
+        &__error {
+            color: rgba(247, 30, 30, 0.808);
+        }
+    }
+
+
+    &__thankheading{
+        line-height: 1.58;
+
+        text-align: center;
+
+        max-width: 40%;
+    }
+    &__thankmessage{
+
+        font-size: 40px;
+        font-weight: 600;
+        line-height: 1.45;
+
+        text-align: center;
+
+        max-width: 70%;
+
+        @media screen and (max-width: 480px) {
+            font-size: 16px;
+        }
+    }
+    &__thanklogo {
+        position: absolute;
+
+        right: 75px;
+        bottom: 80px;
+    }
+}

@@ -1,0 +1,65 @@
+@import "./mixins.scss";
+
+.promo {
+
+    width: 100%;
+    margin-bottom: 110px;
+
+    margin-top: auto;
+
+    @media screen and (max-width: 1320px) {
+        margin-bottom: 90px;
+    }
+
+    &__title {
+        margin-bottom: 50px;
+
+        @media screen and (max-width: 1320px) {
+            margin-bottom: 35px;
+        }
+
+        @media screen and (max-width: 480px) {
+            max-width: 252px;
+        }
+    }
+
+    &__subtitle {
+        @include raleway-t2;
+
+        max-width: 50%;
+
+        line-height: 1.5;
+        opacity: .5;
+
+        border-left: 1px solid #FFFFFF;
+
+        padding-left: 24px;
+        margin-bottom: 64px;
+
+        @include text-switcher(480px);
+
+        @media screen and (max-width: 1320px) {
+            margin-bottom: 50px;
+        }
+    }
+
+    &__buttons {
+        @media screen and (max-width: 1320px) {
+            max-width: 50%;
+        }
+    }
+
+    &__button {
+        @include button;
+
+        &_white {
+            @include button(true, #FFFFFF);
+
+            margin-right: 40px;
+
+            @media screen and (max-width: 1320px) {
+                margin-bottom: 16px;
+            }
+        }
+    }
+}

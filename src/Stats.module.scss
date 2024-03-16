@@ -1,0 +1,38 @@
+@import "./mixins.scss";
+
+.stats {
+
+    display: flex;
+    margin-bottom: 40px;
+
+    .stat{
+
+        padding-left: 25px;
+
+        border-left: 1px solid #FFFFFF;
+
+        width: 30%;
+
+        @media screen and (max-width: 768px) {
+            padding-left: 8px;
+        }
+
+        &__title {
+            @include montserrat-t1;
+
+            margin-bottom: 30px;
+
+            @media screen and (max-width: 768px) {
+                margin-bottom: 0;
+            }
+        }
+
+        &__subtitle{
+            @include raleway-t2;
+
+            @include text-switcher(768px);
+            max-width: 175px;
+            opacity: .5;
+        }
+    }
+}

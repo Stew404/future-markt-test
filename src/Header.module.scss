@@ -1,0 +1,100 @@
+@import "./mixins.scss";
+
+.header {
+    @include container;
+    max-height: 40px;
+    height: 100%;
+
+    margin-top: 40px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    &__blur {
+        filter: blur(15px);
+    }
+
+    &__logo {
+        max-width: 35%;
+    }
+
+    &__menu {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        list-style-type: none;
+
+        &-button{
+            display: none;
+            background-color: transparent;
+            border: none;
+            padding: 0;
+            
+            @media screen and (max-width: 1080px) {
+                display: flex;
+            }
+        }
+        
+        li {
+            margin: 0 15px;
+            @media screen and (max-width: 1080px) {
+                display: none;
+            }
+        }
+
+        a {
+            @include montserrat-t3;
+
+            position: relative;
+
+            &::before {
+                content: "";
+                position: absolute;
+
+                left: 0;
+                bottom: 0;
+
+                width: 0;
+                height: 1px;
+
+                background-color: #fff;
+
+                transition: width .3s ease-out;
+            }
+
+            &:hover,
+            &:focus {
+                outline: none;
+                &::before{
+                    width: 100%;
+                }
+            }
+        }
+
+        @media screen and (max-width: 1080px) {
+            margin-left: auto;
+            margin-right: 10px;
+        }
+    }
+
+
+    &__phone {
+        
+        a {
+            @include montserrat-t2;
+            display: flex;
+            align-items: center;
+        }
+
+        svg {
+            margin-right: 15px;
+        }
+
+        span {
+            @media screen and (max-width: 1080px) {
+                display: none;
+            }
+        }
+    }
+}

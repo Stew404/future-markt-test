@@ -1,0 +1,373 @@
+@mixin raleway-t1 {
+    font-size: 18px;
+    font-family: "Raleway";
+    font-weight: 600;
+    line-height: 1.35;
+
+    @media screen and (max-width: 1320px) {
+        font-size: 14px;
+    }
+    @media screen and (max-width: 768px) {
+        font-size: 12px;
+    }
+    @media screen and (max-width: 480px) {
+        font-size: 10px;
+    }
+}
+
+@mixin raleway-t2 {
+    font-size: 16px;
+    font-family: "Raleway";
+    font-weight: 400;
+    line-height: 1.35;
+
+    @media screen and (max-width: 1320px) {
+        font-size: 13px;
+    }
+    @media screen and (max-width: 768px) {
+        font-size: 12px;
+    }
+    @media screen and (max-width: 480px) {
+        font-size: 11px;
+    }
+}
+
+@mixin montserrat-t1 {
+    font-size: 40px;
+    line-height: 1.41;
+    font-weight: 600;
+    font-family: "Montserrat";
+
+    @media screen and (max-width: 1320px) {
+        font-size: 30px;
+    }
+
+    @media screen and (max-width: 768px) {
+        font-size: 24px;
+    }
+
+    @media screen and (max-width: 480px) {
+        font-size: 16px;
+    }
+}
+
+@mixin montserrat-t2 {
+    font-size: 18px;
+    line-height: 1.41;
+    font-weight: 600;
+    font-family: "Montserrat";
+}
+
+@mixin montserrat-t3 {
+    font-size: 14px;
+    line-height: 1.41;
+    font-weight: 400;
+    font-family: "Montserrat";
+}
+
+@mixin container {
+    max-width: var(--container-width);
+    margin: 0 auto;
+
+    @media screen and (max-width: 1320px) {
+        padding: 0 16px;
+    }
+}
+
+@keyframes arrowHover {
+    0% {
+        transform: translate3d(0,0,0);
+    }
+    50%{
+        transform: translate3d(20%, 20%, 0);
+    }
+    100% {
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+@keyframes buttonFocus {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.1);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+@mixin button($with-text-switcher: true, $bg-color: transparent) {
+    @include raleway-t1;
+    background-color: $bg-color;
+    $text-color: #ffffff;
+    
+    @if $bg-color != transparent{
+        $text-color: var(--dark-blue);
+    }
+
+    border: 1px solid #FFFFFF;
+    
+    @if $bg-color != transparent {
+        border: none;
+    }
+
+    width: 380px;
+    height: 71px;
+
+    padding-right: 72px;
+
+    position: relative;
+
+    cursor: pointer;
+
+    &:focus {
+        outline: none;
+
+        span {
+            animation: buttonFocus 1s ease infinite;
+        }
+    
+        &::after {
+            animation: arrowHover 1s ease infinite;
+        }
+    }
+
+    &:hover{
+        span {
+            transform: scale(1.1);
+        }
+
+        &::after{
+            transform: translate3d(20%, 20%, 0);
+        }
+    }
+
+    &::before {
+        content: "";
+        width: 1px;
+        height: 100%;
+
+        background-color: #FFFFFF;
+
+        @if $bg-color !=transparent {
+            background-color: var(--dark-blue);
+            width: 2px;
+        }
+
+        position: absolute;
+
+        top: 0;
+        right: 72px;
+
+        @media screen and (max-width: 1320px) {
+            right: 51px;
+        }
+
+        @media screen and (max-width: 768px) {
+            right: 40px;
+        }
+        @media screen and (max-width: 480px) {
+            right: 30px;
+        }
+    }
+
+    &::after {
+        content: url("../public/button-arrow-white.svg");
+
+        @if $bg-color !=transparent {
+            content: url("../public/button-arrow-blue.svg");
+        }
+
+        position: absolute;
+
+        width: 20px;
+        height: 20px;
+
+        right: 13px;
+        bottom: 13px;
+
+        transition: transform .5s ease;
+
+        @media screen and (max-width: 768px) {
+
+            content: url("../public/button-arrow-white-small.svg");
+            
+            @if $bg-color !=transparent {
+                content: url("../public/button-arrow-blue-small.svg");
+            }
+
+            width: 8px;
+            height: 8px;
+
+            right: 6px;
+            bottom: 6px;
+        }
+    }
+
+    span {
+        color: $text-color;
+
+        transition: transform .3s ease;
+    }
+
+
+    @if $with-text-switcher {
+        @include text-switcher(1320px);
+    }
+    
+    @media screen and (max-width: 1320px) {
+        width: 250px;
+        height: 51px;
+
+        padding-right: 51px;
+    }
+
+    @media screen and (max-width: 768px) {
+        width: 180px;
+        height: 40px;
+
+        padding-right: 40px;
+    }
+    
+    @media screen and (max-width: 480px) {
+        width: 126px;
+        height: 30px;
+
+        padding-right: 30px;
+    }
+}
+
+@mixin text-switcher($width){
+    span[type="normal"] {
+        display: block;
+    }
+
+    span[type="mobile"] {
+        display: none;
+    }
+
+    @media screen and (max-width: $width) {
+
+        span[type="normal"] {
+            display: none;
+        }
+
+        span[type="mobile"] {
+            display: block;
+        }
+    }
+}
+
+@mixin text-field {
+    background-color: transparent;
+    border: none; 
+    margin: 0;
+    padding: 0;
+
+    font-size: 20px;
+    color: rgba(255, 255, 255, .8);
+
+    border-bottom: 1px solid rgba(255, 255, 255, .8);
+
+    padding-bottom: 10px;
+
+    @media screen and (max-width: 480px) {
+        font-size: 12px;
+    }
+
+    &::placeholder{
+
+        font-family: "Montserrat";
+        font-size: 20px;
+        font-weight: 400;
+        line-height: 1.22;
+
+        text-transform: uppercase;
+
+        @media screen and (max-width: 480px) {
+            font-size: 12px;
+        }
+
+    }
+
+    &:focus {
+        outline: none;
+    }
+
+}
+
+@mixin checkbox {
+    
+    font-family: "Montserrat";
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.28;
+
+    color: #FFFFFF;
+
+    display: flex;
+    align-items: center;
+
+    user-select: none;
+
+    @media screen and (max-width: 480px) {
+        font-size: 12px;
+    }
+
+    input {
+        
+        max-width: 30px;
+        width: 100vw;
+        height: 30px;
+
+        margin-right: 25px;
+    
+        appearance: none;
+    
+        border: 1px solid #FFFFFF;
+    
+        position: relative;
+
+        @media screen and (max-width: 480px) {
+            max-width: 15px;
+            height: 15px;
+        }
+        &::before {
+            content: url("../public/checkbox-checked.svg");
+    
+            opacity: 0;
+    
+            width: 21px;
+            height: 19px;
+    
+            position: absolute;
+    
+            top: 50%;
+            left: 50%;
+    
+            transform: translate(-50%, -55%) scale(0.1);
+            transition: opacity .1s ease;
+            transition: transform .1s ease;
+
+            @media screen and (max-width: 480px) {
+                content: url("../public/checkbox-checked-small.svg");
+                transform: translate(-45%, -50%) scale(0.1);
+            }
+        }
+    
+        &:checked {
+            &::before {
+                opacity: 1;
+                transform: translate(-50%, -55%) scale(1);
+
+                @media screen and (max-width: 480px) {
+                    transform: translate(-37%, -45%) scale(1);
+                }
+            }
+        }
+    }
+}

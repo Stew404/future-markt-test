@@ -1,0 +1,41 @@
+@import "./mixins.scss";
+
+.main {
+    @include container;
+
+    max-height: 100%;
+    height: calc(100vh - 80px);
+
+    display: flex;
+    flex-direction: column;
+
+    &__blur {
+        filter: blur(15px);
+    }
+    
+    img {
+        position: fixed;
+
+        right: calc((100vw - var(--container-width))/ 2);
+        bottom: 0;
+
+        transform: translateX(17%);
+
+        z-index: -1;
+        
+        @media screen and (max-width: 1320px) {
+            max-height: calc(100vh * 0.8);
+        }
+        @media screen and (max-width: 768px) {
+            max-height: 620px;
+            transform: translateX(25%);
+        }
+        @media screen and (max-width: 480px) {
+            max-height: 432px;
+            transform: translateX(30%);
+        }
+
+        overflow: hidden;
+    }
+}
+
